@@ -1,0 +1,2 @@
+# Linux_nginx_sh
+基于Linux的nginx相关shell脚本项目
