@@ -16,9 +16,9 @@ test_yum () {
 	yum clean all &> $NULL
 	repolist=$(yum repolist | awk  '/repolist:.*/{print $2}' | sed 's/,//')
 	if [ $repolist -gt 0 ];then
-		return 1
+		return 0
 	fi
-	return 0
+	return 1
 }
 
 print_info () {
