@@ -9,8 +9,8 @@
 
 
 # static variable
-NULL=/dev/null
-NGINX_INTAR="nginx-1.8.0.tar.gz"
+NULL=/var/log/error_install_nginx.log
+NGINX_INTAR="nginx-1.12.2.tar.gz"
 
 test_yum () {
 	yum clean all &> $NULL
@@ -101,10 +101,33 @@ rotate_line &
 disown $!
 
 if [ -f configure ];then
-	./configure --user=nginx \
+	./configure \
 	--prefix=/usr/local/nginx \
+	--user=nginx \
+	--group=nginx \
+	--with-pcre \
+	--with-http_ssl_module \
+	--with-http_v2_module \
+	--with-http_realip_module \
+	--with-http_addition_module \
+	--with-http_sub_module \
+	--with-http_dav_module \
+	--with-http_flv_module \
+	--with-http_mp4_module \
+	--with-http_gunzip_module \
+	--with-http_gzip_static_module \
+	--with-http_random_index_module \
+	--with-http_secure_link_module \
 	--with-http_stub_status_module \
-	--with-http_ssl_module  > $NULL
+	--with-http_auth_request_module \
+	--with-http_image_filter_module \
+	--with-http_slice_module \
+	--with-mail \
+	--with-threads \
+	--with-file-aio \
+	--with-stream \
+	--with-mail_ssl_module \
+	--with-stream_ssl_module  > $NULL
 	result=$?
 	kill -9 $!
 
